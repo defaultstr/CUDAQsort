@@ -23,9 +23,17 @@ struct lqparam {
     int sbsize;
 }
 
+struct plist {
+	int left[MAXTHREADS * MAXBLOCKS];
+	int right[MAXTHREADS * MAXBLOCKS];
+	int blockleft[MAXBLOCKS];
+	int blockright[MAXBLOCKS];
+}
+
 sequence *workset;
 sequence *doneset;
 param *params;
 param *dparams;
+plist *dplist;
 
 #endif

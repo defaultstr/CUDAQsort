@@ -27,7 +27,17 @@ void GPUSORT(int size, int *array, int *darray1, int *darray2) {
             params[paramsize-1].last = true;
         }
         cudaMemcpy(dparams, params, paramsize * sizeof(param), cudaMemcpyHostToDevice);
-        paramsize = GQSORT<<< TODO >>>(dparams, TODO); 
+        GQSORT1<<< TODO >>>(dparams, TODO); 
+		int lsum = 0, gsum = 0;
+		for(int i = 0; i < paramsize; i ++) {
+			int l = plist.blockleft[i];
+			int r = plist.blockright[i];
+			plist.blockleft[i] = workset[params[i].parent].begin;
+			plist.blockright[i] = workset[parms[i].parent].end;
+			workset[params[i].parent].begin += l;
+			workset[params[i].parent].end -= r;
+		}
+        GQSORT2<<< TODO >>>(dparams, TODO); 
         cudaMemcpy(params, dparams, paramsize * sizeof(param), cudaMemcpyDeviceToHost);
         totsize = worksize = 0;
         sequence *temp;
