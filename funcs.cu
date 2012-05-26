@@ -38,7 +38,7 @@ GQSORT2(param *dparams, int *darray1, int *darray2, plist *dplist, bool flip) {
 	lfrom = plist.blockleft[blockIdx.x] + plist.left[threadIdx.x + blockIdx.x * blockDim.x];
 	gfrom = plist.blockright[blockIdx.x] - plist.right[threadIdx.x + blockIdx.x * blockDim.x];
 	int i = dparams[blockIdx.x].start + threadIdx.x;
-	for (; i < dparams[blockIdx.x].end; i++) {
+	for (; i < dparams[blockIdx.x].end; i += blockDim.x) {
 		if (darray[i] < dparams[blockIdx.x].pivot) 
 			darray2[lfrom++] = darray[i];
 		if (darray[i] > dparams[blockIdx.x].pivot)
