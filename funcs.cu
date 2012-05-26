@@ -9,7 +9,7 @@ GQSORT1(param *dparams, int *darray1, int *darray2, plist *dplist, bool flip) {
 	for (int i = dparams[blockIdx.x].start + threadIdx.x;
 	     i < dparams[blockIdx.x].end; i += blockDim.x) {
 		if (darray[i] < pivot) lt++;
-		if (darray[i] > pivot) gt++;
+		if (darray[i] >= pivot) gt++;
 	}
 	lt[threadIdx.x] = lt;
 	gt[threadIdx.x] = gt;
@@ -41,9 +41,11 @@ GQSORT2(param *dparams, int *darray1, int *darray2, plist *dplist, bool flip) {
 	for (; i < dparams[blockIdx.x].end; i += blockDim.x) {
 		if (darray[i] < dparams[blockIdx.x].pivot) 
 			darray2[lfrom++] = darray[i];
-		if (darray[i] > dparams[blockIdx.x].pivot)
+		if (darray[i] >= dparams[blockIdx.x].pivot)
 			darray2[gfrom--] = darray[i];
 	}
 	
+	//PART III?
+
 }
 
