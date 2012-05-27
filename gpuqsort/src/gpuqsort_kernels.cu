@@ -277,7 +277,7 @@ __global__ void part1(unsigned int* data, struct Params<unsigned int>* params, s
 			minpiv[0]=min(minpiv[0],minpiv[i]);
 			maxpiv[0]=max(maxpiv[0],maxpiv[i]);
 		}
-	  }
+    }
   	__syncthreads();
 	
 	// Store each threads part of the cumulative count
